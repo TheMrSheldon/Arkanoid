@@ -2,6 +2,7 @@ package Arkanoid;
 
 import java.awt.*;
 
+//Basically the same as a block
 public class Player {
 	private Arkanoid game;
 	int height = 10;
@@ -13,6 +14,7 @@ public class Player {
 		position = new Point(0, game.height/2-height-20);
 	}
 	
+	//Calculate into which direction the ball would bounce off
 	public Point bounceVector(Rectangle hitbox) {
 		Point p = new Point(1, 1);
 		Rectangle hb_t = new Rectangle(position.x-width/2, position.y-height/2, width, height/3);
@@ -27,6 +29,7 @@ public class Player {
 	public void render(Graphics g) {
 		g.setColor(Color.lightGray);
 		g.fillRect(position.x-width/2, position.y-height/2, width, height);
+		//Uncomment to debug-render hitboxes
 		/*Rectangle hb_t = new Rectangle(game.player.position.x-game.player.width/2, game.player.position.y-game.player.height/2, game.player.width, height/3);
 		Rectangle hb_b = new Rectangle(game.player.position.x-game.player.width/2, game.player.position.y+game.player.height/2-height/3, game.player.width, height/3);
 		Rectangle hb_l = new Rectangle(game.player.position.x-game.player.width/2, game.player.position.y-game.player.height/2, width/10, game.player.height);
