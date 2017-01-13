@@ -2,6 +2,7 @@ package Arkanoid;
 
 import java.awt.*;
 
+//The Ball class, used to calculate hits and and ball movement
 public class Ball {
 	private Arkanoid game;
 	private int radius = 10;
@@ -13,6 +14,7 @@ public class Ball {
 		this.game = game;
 	}
 	
+	//On Every tick... move the ball and check for collisions
 	public void tick(double deltatime) {
 		position.translate((int)(movement.x*(speed*deltatime)), (int)(movement.y*(speed*deltatime)));
 		if (Math.abs(position.x) >= Math.abs(game.width/2)) movement.x = -movement.x;
@@ -34,21 +36,6 @@ public class Ball {
 				game.blocks.remove(b);
 			}
 		}
-		
-		/*Rectangle playerHitbox = new Rectangle(game.player.position.x-game.player.width/2, game.player.position.y-game.player.height/2, game.player.width, game.player.height);
-		Rectangle ballHitbox = new Rectangle(position.x-radius, position.y-radius, radius*2, radius*2);
-		if (playerHitbox.intersects(ballHitbox)) movement.y = -movement.y;
-		
-		for (int i = 0; i < game.blocks.size(); i++) {
-			Block b = game.blocks.get(i);
-			Rectangle blockHitbox = new Rectangle(b.position.x, b.position.y, b.width, b.height);
-			if (ballHitbox.intersects(blockHitbox)) {
-				game.OnBlockBroken(b);
-				game.blocks.remove(b);
-				movement.y = -movement.y;
-			}
-		}*/
-		
 	}
 	
 	public void render(Graphics g) {
