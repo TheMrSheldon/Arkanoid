@@ -8,6 +8,7 @@ public class Block {
 	public int height = 30;
 	public Color mainColor = Color.red.darker();
 	
+	//Calculate in which direction the ball should bounce off
 	public Point bounceVector(Rectangle hitbox) {
 		Point p = new Point(1, 1);
 		Rectangle hb_t = new Rectangle(position.x, position.y, width, height/3);
@@ -32,6 +33,7 @@ public class Block {
 			g.drawLine(position.x+i, position.y+height-i, position.x+i, position.y);
 		}
 		
+		//Uncomment to debug render hitboxes
 		/*Rectangle hb_t = new Rectangle(position.x, position.y, width, height/3);
 		Rectangle hb_b = new Rectangle(position.x, position.y+height-height/3, width, height/3);
 		Rectangle hb_l = new Rectangle(position.x, position.y, width/10, height);
