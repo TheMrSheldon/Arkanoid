@@ -1,5 +1,6 @@
 package Arkanoid;
 
+//Used to repeatedly update the game
 public class GameThread extends Thread {
 	private Arkanoid game;
 	public GameThread(Arkanoid game) {
@@ -18,7 +19,7 @@ public class GameThread extends Thread {
 					game.lastUpdate = System.nanoTime();
 					Thread.sleep(1);
 				} else {
-					game.tick();
+					game.tick();//Calulate the game
 					game.lastUpdate = System.nanoTime();
 					Thread.sleep((long)(1000.0/game.tickrate));
 				}
