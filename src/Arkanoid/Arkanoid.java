@@ -14,6 +14,7 @@ public class Arkanoid extends JPanel {
 	private int balls = 3;
 	public boolean isRunning = false, isPaused = false;
 	
+	//Assign the rows to colors (just for cosmetic reasons)
 	private Color[] rowColors = new Color[]{Color.gray, Color.red.darker(), Color.yellow.darker(), Color.blue.darker(), Color.pink, Color.green.darker()};
 	public ArrayList<Block> blocks;
 	
@@ -23,6 +24,7 @@ public class Arkanoid extends JPanel {
 	
 	private GameThread gameThread;
 	
+	//The class to handle the game, it is just a plain component to be added to the Window
 	public Arkanoid(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -47,6 +49,7 @@ public class Arkanoid extends JPanel {
 		});
 	}
 	
+	//Reset the game so it can be played
 	public void reset() {
 		player = new Player(this);
 		ball = new Ball(this);
@@ -60,13 +63,16 @@ public class Arkanoid extends JPanel {
 		gameThread = new GameThread(this);
 		gameThread.start();
 	}
+	//pause/resume the game
 	public void togglePause() {
 		isPaused = !isPaused;
 	}
+	//stop the game
 	public void quit() {
 		isRunning = false;
 	}
 	
+	//Spawns the blocks into the gameenvironment
 	private void createBlocks(int rows, int columns) {
 		blocks = new ArrayList<Block>();//new Block[rows*columns];
 		int gap = 10;
@@ -96,14 +102,16 @@ public class Arkanoid extends JPanel {
 	public void OnGameOver(boolean won) {
 		quit();
 	}
-	
+	//Called whenever the Game "ticks"/in every cycle of the game
 	public void tick() {
+		//deltatime for framerate independence
 		double deltatime = (System.nanoTime()-lastUpdate)/1000000.0;//in milliseconds
 		ball.tick(deltatime);
 		if (blocks.isEmpty()) OnGameOver(true);
 		repaint();
 	}
 	
+	//render the game
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.translate((getWidth()-width)/2, (getHeight()-height)/2);
